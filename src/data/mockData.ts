@@ -67,3 +67,27 @@ export const dashboardStats = {
   assetsMonitored: 6,
   scansThisMonth: 12,
 };
+
+export const securityScoreTrend = [
+  { month: "Sep", score: 62 },
+  { month: "Oct", score: 65 },
+  { month: "Nov", score: 70 },
+  { month: "Dec", score: 68 },
+  { month: "Jan", score: 74 },
+  { month: "Feb", score: 78 },
+];
+
+export const severityDistribution = [
+  { name: "High", value: 3, fill: "hsl(var(--destructive))" },
+  { name: "Medium", value: 10, fill: "hsl(var(--warning))" },
+  { name: "Low", value: 25, fill: "hsl(var(--primary))" },
+];
+
+export const scanHistory = [
+  { date: "Jan 6", infra: 2, web: 1, code: 3 },
+  { date: "Jan 13", infra: 1, web: 2, code: 2 },
+  { date: "Jan 20", infra: 3, web: 1, code: 4 },
+  { date: "Jan 27", infra: 1, web: 3, code: 2 },
+  { date: "Feb 3", infra: 2, web: 2, code: 3 },
+  { date: "Feb 6", infra: 1, web: 1, code: 1 },
+];
