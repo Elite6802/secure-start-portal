@@ -1,0 +1,72 @@
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: aegis
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    command: gunicorn aegis_backend.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "127.0.0.1:${API_PORT:-18080}:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+  worker:
+    build: .
+    command: celery -A aegis_backend worker -l info
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      C_FORCE_ROOT: "true"
+    depends_on:
+      - db
+      - redis
+
+  scanner:
+    build:
+      context: .
+      dockerfile: Dockerfile.scanner
+    command: celery -A aegis_backend worker -l info -Q scanner -n scanner@%h
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      C_FORCE_ROOT: "true"
+    depends_on:
+      - db
+      - redis
+
+  scheduler:
+    build: .
+    command: celery -A aegis_backend beat -l info
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
