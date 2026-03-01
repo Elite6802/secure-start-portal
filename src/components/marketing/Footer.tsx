@@ -12,14 +12,14 @@ export function Footer() {
               <span className="font-display text-lg font-bold">Aegis</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Proactive cybersecurity for startups and institutions. Prevention, monitoring, and secure development.
+              Proactive cybersecurity for growth teams and regulated institutions. Prevention, monitoring, and secure engineering.
             </p>
           </div>
           <div>
             <h4 className="font-display font-semibold mb-3 text-sm">Services</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>Infrastructure Security</li>
-              <li>Web & API Security</li>
+              <li>Web and API Security</li>
               <li>Code Security</li>
               <li>Cloud Security</li>
             </ul>
@@ -43,7 +43,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-10 border-t border-border pt-6 text-center text-xs text-muted-foreground">
-          © 2026 Aegis Security. All rights reserved.
+          (c) 2026 Aegis Security. All rights reserved.
         </div>
       </div>
     </footer>

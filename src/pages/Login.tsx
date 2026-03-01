@@ -4,17 +4,40 @@ import { Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { login } from "@/lib/api";
 
 export default function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    setError(null);
+    try {
+      const form = e.target as HTMLFormElement;
+      const formData = new FormData(form);
+      const username = String(formData.get("email"));
+      const password = String(formData.get("password"));
+      await login(username, password);
       navigate("/dashboard");
-    }, 800);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Login failed.";
+      const normalized = message.toLowerCase();
+      if (normalized.includes("user") && normalized.includes("not")) {
+        setError("User not found. Please contact your administrator.");
+      } else if (normalized.includes("no active account")) {
+        setError("User not found. Please contact your administrator.");
+      } else if (normalized.includes("credentials") || normalized.includes("password")) {
+        setError("Credentials do not match. Please try again.");
+      } else {
+        setError("Login failed. Please verify your credentials or contact your administrator.");
+      }
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -26,17 +49,17 @@ export default function Login() {
             <span className="font-display text-2xl font-bold">Aegis</span>
           </div>
           <h1 className="font-display text-2xl font-bold">Client Portal</h1>
-          <p className="mt-2 text-sm text-muted-foreground">Sign in to access your security dashboard.</p>
+          <p className="mt-2 text-sm text-muted-foreground">Sign in to review security posture and reports.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="glass-card rounded-2xl p-8 space-y-5">
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" required placeholder="you@company.com" className="mt-1.5" />
+            <Input id="email" name="email" type="email" required placeholder="you@company.com" className="mt-1.5" />
           </div>
           <div>
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" required placeholder="••••••••" className="mt-1.5" />
+            <Input id="password" name="password" type="password" required placeholder="********" className="mt-1.5" />
           </div>
           <div className="flex justify-end">
             <button type="button" className="text-xs text-primary hover:underline">Forgot password?</button>
@@ -44,8 +67,9 @@ export default function Login() {
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? "Signing in..." : "Sign In"}
           </Button>
+          {error && <p className="text-xs text-destructive text-center">{error}</p>}
           <p className="text-xs text-center text-muted-foreground mt-4">
-            Access is limited to onboarded clients. Contact your security team for assistance.
+            Access is limited to onboarded clients. Contact your security administrator for assistance.
           </p>
         </form>
       </div>

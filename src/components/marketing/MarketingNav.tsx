@@ -38,7 +38,7 @@ export function MarketingNav() {
             <Button variant="outline" size="sm">Client Portal</Button>
           </Link>
           <Link to="/contact">
-            <Button size="sm">Get Started</Button>
+            <Button size="sm">Request Assessment</Button>
           </Link>
         </div>
 
@@ -66,7 +66,7 @@ export function MarketingNav() {
               <Button variant="outline" className="w-full" size="sm">Client Portal</Button>
             </Link>
             <Link to="/contact" onClick={() => setMobileOpen(false)}>
-              <Button className="w-full" size="sm">Get Started</Button>
+              <Button className="w-full" size="sm">Request Assessment</Button>
             </Link>
           </div>
         </div>

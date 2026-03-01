@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 
 @layer base {
   :root {
@@ -32,13 +32,13 @@
     --success: 152 69% 40%;
     --success-foreground: 0 0% 100%;
 
-    --sidebar-background: 220 20% 6%;
-    --sidebar-foreground: 210 15% 78%;
+    --sidebar-background: 220 20% 98%;
+    --sidebar-foreground: 220 20% 12%;
     --sidebar-primary: 213 94% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 20% 12%;
-    --sidebar-accent-foreground: 210 15% 90%;
-    --sidebar-border: 215 15% 16%;
+    --sidebar-accent: 215 20% 92%;
+    --sidebar-accent-foreground: 220 20% 12%;
+    --sidebar-border: 215 20% 88%;
     --sidebar-ring: 213 94% 52%;
   }
 
@@ -67,6 +67,15 @@
     --warning-foreground: 0 0% 100%;
     --success: 152 69% 40%;
     --success-foreground: 0 0% 100%;
+
+    --sidebar-background: 220 20% 6%;
+    --sidebar-foreground: 210 15% 78%;
+    --sidebar-primary: 213 94% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 20% 12%;
+    --sidebar-accent-foreground: 210 15% 90%;
+    --sidebar-border: 215 15% 16%;
+    --sidebar-ring: 213 94% 52%;
   }
 }
 
